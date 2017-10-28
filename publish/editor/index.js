@@ -355,8 +355,8 @@ var EditorConcist = function (_React$Component) {
           urlValue = _state.urlValue;
 
       var entityKey = _draftJs.Entity.create('LINK', 'MUTABLE', { url: urlValue });
+      this.onChange(_draftJs.RichUtils.toggleLink(editorState, editorState.getSelection(), entityKey));
       this.setState({
-        editorState: _draftJs.RichUtils.toggleLink(editorState, editorState.getSelection(), entityKey),
         showURLInput: false,
         urlValue: ''
       }, function () {
@@ -379,9 +379,7 @@ var EditorConcist = function (_React$Component) {
 
       var selection = editorState.getSelection();
       if (!selection.isCollapsed()) {
-        this.setState({
-          editorState: _draftJs.RichUtils.toggleLink(editorState, selection, null)
-        });
+        this.onChange(_draftJs.RichUtils.toggleLink(editorState, selection, null));
       } else {
         _message2.default.error(_i18n.lang[this.state.language].selectedLink, 5);
       }
